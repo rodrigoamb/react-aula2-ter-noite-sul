@@ -1,4 +1,34 @@
+import { useState } from "react";
+
 export default function Cadastro() {
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  const [dadosCadastro, setDadosCadastro] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  function handleChangeInput(event) {
+    const { value, name } = event.target;
+
+    setDadosCadastro({
+      ...dadosCadastro,
+      [name]: value,
+    });
+  }
+
+  function handleSubmitForm(event) {
+    event.preventDefault();
+
+    console.log(dadosCadastro);
+
+    //faz a requisição para o backend enviando os dados
+  }
+
+  //envio do formulário
+
   return (
     <main className="w-full flex">
       <div className="relative flex-1 hidden items-center justify-center h-screen bg-gray-900 lg:flex">
@@ -174,11 +204,14 @@ export default function Cadastro() {
               Or continue with
             </p>
           </div>
-          <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+          <form onSubmit={handleSubmitForm} className="space-y-5">
             <div>
               <label className="font-medium">Name</label>
+
               <input
+                onChange={handleChangeInput}
                 type="text"
+                name="name"
                 required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
               />
@@ -187,7 +220,9 @@ export default function Cadastro() {
               <label className="font-medium">Email</label>
               <input
                 type="email"
+                onChange={handleChangeInput}
                 required
+                name="email"
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
               />
             </div>
@@ -195,6 +230,8 @@ export default function Cadastro() {
               <label className="font-medium">Password</label>
               <input
                 type="password"
+                name="password"
+                onChange={handleChangeInput}
                 required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
               />
